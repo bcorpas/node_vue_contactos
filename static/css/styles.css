@@ -1,0 +1,192 @@
+/* app */
+#app{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+}
+
+
+/* header */
+.headerApp{
+    width: 100%;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, .3);
+    z-index: 10;
+}
+
+.hTitle{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.cPild{
+    font-weight: bold;
+    margin-right: .1rem;
+    background-color: var(--mainColor);
+    color: var(--secondColor);
+    padding: .3rem;
+    border-radius: 7px;
+}
+
+
+/* body */
+.cContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+
+/* contactos side */
+.contactosSide{
+    margin-top: 7rem;
+    width: 35rem;
+    position: relative;
+}.contactosSide::before{
+    content: 'Mis contactos';
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 1.3rem);
+    width: 100%;
+    padding: .2rem;
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--secondColor);
+    border-bottom: solid var(--secondColor) 2px;
+}
+
+
+/* cards */
+.cardsContainer{
+    width: 100%;
+    height: auto;
+    max-height: 40rem;
+    overflow: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contactoCard{
+    width: 13rem;
+    background-color: white;
+    border-radius: .8rem;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .1),
+                0 5px 6px rgba(0, 0, 0, .2);
+    margin-bottom: 1rem;
+}
+.cCTitle{
+    width: 100%;
+    padding: .4rem;
+    background-color: var(--mainColor);
+    color: var(--secondColor);
+    font-weight: bold;
+    font-size: 1.1rem;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}.cCTitleIcon{
+    width: 1.5rem;
+    cursor: pointer;
+}
+.cCList{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
+    gap: .3rem;
+}.cCList > .cCElement{
+    width: 100%;
+    font-size: .9rem;
+    box-shadow: 0 -3px 2px rgb(0 0 0 / .4);
+    overflow: hidden;
+}.cCList > .cCElement > .cCELeftSide{
+    width: 100%;
+    background-color: var(--secondColor);
+    color: var(--mainColor);
+    padding: .4rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    word-wrap: break-word;
+}.cCList > .cCElement > .cCERightSide{
+    width: 100%;
+    background-color: white;
+    color: var(--secondColor);
+    word-wrap: break-word;
+    padding: .4rem; 
+}
+
+
+/* formSide */
+.formSide{
+    margin-top: 7rem;
+    width: 15rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+}.formSide::before{
+    content: 'Formulario';
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 1.3rem);
+    width: 100%;
+    padding: .2rem;
+    text-align: center;
+    font-size: 1.8rem;
+    color: var(--secondColor);
+    border-bottom: solid var(--secondColor) 2px;
+}
+
+.fSideTitle{
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    padding-top: 0;
+    color: var(--secondColor);
+    font-size: 1.5rem;
+    margin-bottom: .3rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 var(--mainColor);
+}
+
+.cInput{
+    width: 100%;
+    background-color: transparent;
+    padding: .4rem .7rem;
+    color: var(--secondColor);
+    border-bottom: solid var(--secondColor) 2px;
+    margin-bottom: .5rem;
+    position: relative;
+}
+
+
+.cButton{
+    width: 80%;
+    padding: .5rem;
+    border-radius: .3rem;
+    background-color: var(--secondColor);
+    color: var(--mainColor);
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, .3),
+                0 4px 2px rgba(0, 0, 0, .4);
+    margin: 1rem 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+}.cButton.hidden{
+    display: none;
+}
+

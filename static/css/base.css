@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Raleway&family=Roboto+Mono&display=swap');
+
+:root{
+  --mainColor: #F8B421;
+  --secondColor: #000f1a;
+  --mainFont: 'Roboto Mono', monospace;
+}
+
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  font-family: var(--mainFont);
+  font-weight: normal;
+  scroll-behavior: smooth;
+}
+
+
+
+
+/* Personalización de algunas clases */
+
+/* Para fuentes */
+.bd{
+  font-weight: bold;
+}
+.mC{
+  color: var(--mainColor);
+}.sC{
+  color: var(--secondColor);
+}
+.info, .helptext{
+  color: deepskyblue;
+}
+.noCursive{
+  font-style: normal;
+}
+.mF{
+  font-family: var(--mainFont);
+}
+
+
+
+
+/* Para backgrounds */
+.mainBG{
+  background-color: var(--mainColor);
+}
+.secondBG{
+  background-color: var(--secondColor);
+}
+.bBG{
+  background-color: black;
+}
+.wBG{
+  background-color: white;
+}
+.sweetBG{
+  background-color: #eeeeee;
+}
+.mBBG{
+  background-image: linear-gradient(180deg, #572364, #000f1a);
+}
+
+
+
+
+
+
+
+
+
+
+.bDarkButton{
+  background-color: var(--mainColor);
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 3px 3px 4px rgb(0 0 0 / 35%),
+              inset 3px 3px 4px rgb(255 255 255 / 35%);
+  transition: all .5s linear;
+  font-weight: normal;
+  font-size: 1rem;
+}.bDarkButton:focus{
+  box-shadow: inset -2px -2px 3px rgb(255 255 255 / 25%),
+              inset 3px 3px 4px rgb(255 255 255 / 35%);
+}
+
+
+
+
+
+
+
+
+
+/*Para el scroll de todos los elementos*/
+/* Tamaño del scroll */
+*::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+  
+/* Estilos barra (thumb) de scroll */
+*::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 7px;
+}
+  
+*::-webkit-scrollbar-thumb:active {
+  background-color: gray;
+}
+  
+*::-webkit-scrollbar-thumb:hover {
+  background: gray;
+  /* box-shadow: 0 0 12px 1px rgba(0, 0, 0, 1); */
+}
+  
+/* Estilos track de scroll */
+*::-webkit-scrollbar-track {
+  background: transparent;
+  /* border-radius: 7px; */
+}
+  
+*::-webkit-scrollbar-track:hover, 
+*::-webkit-scrollbar-track:active {
+  background: transparent;
+}

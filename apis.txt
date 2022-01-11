@@ -1,0 +1,11 @@
+-- APIs Contactos Model
+GET     -   /apis/contactos/get/all     -    Devuelve todos los contactos
+GET     -   /apis/contactos/get/one/2   -    Devuelve el contacto con ID=2
+
+POST    -   /apis/contactos/create      -    Inserta un contacto
+
+PUT     -   /apis/contactos/modify/2    -    Modifica el contacto con ID=2
+
+DELETE  -   /apis/contactos/delete/2    -    Elimina el contacto con ID=2
+
+

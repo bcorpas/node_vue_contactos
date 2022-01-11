@@ -1,0 +1,60 @@
+version: '3'
+
+# Cada servicio es una imagen de docker, cada 
+# servicio será un contenedor cuando se despliegue 
+# el docker-compose.
+services:
+    
+    mariadb_db:  # Este es el nombre del servicio
+        container_name: contactos_app_mariadb_db  # El nombre que tendrá el contenedor
+        image: mariadb:10.3.32  # En este caso se utilizará una imagen, esta es la imagen
+        restart: always
+        env_file: ./.env  # Ruta del archivo de variables de entorno, para acceder 
+        # a estas variables de entorno desde este archivo, se usa $NOMBRE_VARIABLE_ENTORNO
+        environment:  # Se especifica que se van a enviar variables de entorno para el contenedor, 
+        # estas variables de entorno inclusive sirven para enviarlas como parámetros al momento 
+        # de crear el contenedor, por ejemplo, la variable MYSQL_DATABASE sirve para que al momento 
+        # de crear el contenedor de mariadb, se inicialice una BD, y la variable MARIADB_ROOT_PASSWORD 
+        # es para que al momento de crear el contenedor se le asigne esa contraseña al usuario root.
+          - MYSQL_DATABASE=$DB_NAME
+          - MARIADB_ROOT_PASSWORD=$MARIADB_ROOT_PASSWORD
+          - DB_HOST=$DB_HOST
+          - DB_USER=$DB_USER
+          - DB_PASSWORD=$DB_PASSWORD
+          - DB_NAME=$DB_NAME
+        ports:  # Se mapea (enlaza) el puerto del contenedor con el 
+        # puerto de la máquina (PC) local.
+          - $MARIADB_EXPOSE_PORT:$MARIADB_DOCKER_PORT
+
+    nodejs_server:
+        container_name: contactos_app_nodejs_server
+        build: .  # Esta vez en vez de crear el contenedor a partir de una 
+        # imagen alojada en los servidor de docker, se crea el contenedor creando 
+        # una imagen según las instrucciones del archivo Dockerfile en la ruta 
+        # especificada, en este caso se coloca un . para indicar que busque el 
+        # Dockerfile en la ruta actual.
+        env_file: ./.env
+        environment:
+          - DB_HOST=$DB_HOST
+          - DB_USER=$DB_USER
+          - DB_PASSWORD=$DB_PASSWORD
+          - DB_NAME=$DB_NAME
+          - NODE_DOCKER_PORT=$NODE_DOCKER_PORT
+          - SECRET_TOKEN_LOGIN=$SECRET_TOKEN_LOGIN
+          - USER_SESSION_TIME=$USER_SESSION_TIME
+        restart: always  # Se especifica que si falla el despliegue de este contenedor, 
+        # que vuelva a intentar desplegarlo nuevamente. En este caso se usa porqué no se 
+        # sabe cuándo estará lista la BD, ya que pese a que con depends_on se obliga a 
+        # esperar a que inicie el servicio de la BD, una vez que inicia tarda levantando 
+        # la BD, esto ocasiona que este servicio (este contenedor) solicite la conexión a 
+        # la BD antes de que la BD esté levantada, dando error y evitando que el contenedor 
+        # se levante, aunque también se puede evitar que el contenedor se caiga cuando node.js 
+        # no logra conectar a la BD.
+        depends_on:
+          - mariadb_db
+        ports:
+          - $NODE_EXPOSE_PORT:$NODE_DOCKER_PORT
+        links:  # Crea un puente para que los dos contenedores estén en la misma red
+          - mariadb_db
+        volumes:
+          - .:/usr/src/app

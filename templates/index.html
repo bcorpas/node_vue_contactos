@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/sweet_alert.css">
+</head>
+<body>
+
+    <div id="app">
+
+        <header class="headerApp secondBG">
+            <h1 class="hTitle mC"><b class="cPild">Contactos</b>App</h1>
+        </header>
+
+        <div class="cContainer sweetBG">
+
+            <section class="contactosSide">
+
+                <div class="cardsContainer">
+                    
+                    <div class="contactoCard" v-for="contacto in contactos" :key="contacto.id">
+
+                        <h2 class="cCTitle">
+                            Contacto: #{{ contacto.id }} 
+                            <img src="/img/settings_black_24dp.svg" class="cCTitleIcon" 
+                            v-on:click="adminContacto(contacto)">
+                        </h2>
+
+                        <ul class="cCList">
+                            <li class="cCElement">
+                                <div class="cCELeftSide">Nombres:</div>
+                                <div class="cCERightSide">{{ contacto.nombres }}</div>
+                            </li>
+                            <li class="cCElement">
+                                <div class="cCELeftSide">Apellidos:</div>
+                                <div class="cCERightSide">{{ contacto.apellidos }}</div>
+                            </li>
+                            <li class="cCElement">
+                                <div class="cCELeftSide">Correo:</div>
+                                <div class="cCERightSide">{{ contacto.correo }}</div>
+                            </li>
+                            <li class="cCElement">
+                                <div class="cCELeftSide">Celular:</div>
+                                <div class="cCERightSide">{{ contacto.celular }}</div>
+                            </li>
+                            <li class="cCElement">
+                                <div class="cCELeftSide">Telefono:</div>
+                                <div class="cCERightSide">{{ contacto.telefono }}</div>
+                            </li>
+                            <li class="cCElement">
+                                <div class="cCELeftSide">Dirección:</div>
+                                <div class="cCERightSide">{{ contacto.direccion }}</div>
+                            </li>
+                        </ul>
+    
+                    </div>
+
+                </div>
+                
+            </section>
+
+            <div class="formSide">
+
+                <h2 class="fSideTitle" id="form_legend">{{ form_default_legend }}</h2>
+
+                <input type="text" placeholder="Nombres" class="cInput" v-model="contacto_form.nombres">
+                <input type="text" placeholder="Apellidos" class="cInput" v-model="contacto_form.apellidos">
+                <input type="text" placeholder="Correo" class="cInput" v-model="contacto_form.correo">
+                <input type="text" placeholder="Celular" class="cInput" v-model="contacto_form.celular">
+                <input type="text" placeholder="Teléfono" class="cInput" v-model="contacto_form.telefono">
+                <input type="text" placeholder="Dirección" class="cInput" v-model="contacto_form.direccion">
+
+                <button id="fiButton" class="cButton" v-on:click="saveContacto()">
+                    Crear
+                </button>
+
+                <button id="fuButton" class="cButton hidden" v-on:click="updateContacto()">
+                    Modificar
+                </button>
+                <button id="fdButton" class="cButton hidden" v-on:click="deleteContacto()">
+                    Eliminar
+                </button>
+                <button id="fcButton" class="cButton hidden" v-on:click="resetForm()">
+                    Cancelar
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+    
+
+
+<!-- Vue APP -->
+<script src="/js/vue.app.js"></script>
+</body>
+</html>

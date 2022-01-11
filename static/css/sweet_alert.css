@@ -1,0 +1,31 @@
+.sweetAlert{
+    width: 15rem;
+    padding: 1rem;
+    background-color: #eee;
+    text-align: center;
+    color: black;
+    border-radius: .15rem;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1),
+                0 5px 3px rgba(0, 0, 0, .1);
+    position: fixed;
+    right: 1.5rem;
+    bottom: .3rem;
+    transform: scale(0);
+    opacity: 0;
+    transition: all 1s ease-in-out;
+}.sweetAlert.active{
+    transform: scale(1);
+    opacity: 1;
+    bottom: 5rem;
+}
+
+.sweetAlert.error{
+    background-color: #ff00002b;
+    color: #c70000;
+}
+
+.sweetAlert.success{
+    background-color: #6eff002b;
+    color: #104e01;
+}
+
