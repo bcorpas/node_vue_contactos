@@ -1,4 +1,4 @@
-# node_vue_contactos [1.0.0]
+# node_vue_contactos [1.0.1]
 
 ---
 node_vue_contactos es una aplicación web sencilla para gestionar una libreta de contactos con propósitos educativos.
@@ -69,6 +69,8 @@ No es necesario configurar la aplicación para que esta funcione, una vez instal
 
 **CONTENEDOR DEL SERVIDOR**
 > Para cambiar el puerto por donde se ejecuta (sirve) el servidor node.js dentro de su contenedor (servidor/servicio), se debe modificar la variable de entorno NODE_DOCKER_PORT dentro del archivo  [/.env](https://github.com/bcorpas/node_vue_contactos/blob/master/.env) del proyecto, así mismo, para cambiar el puerto por el cual se ejecuta el servidor node.js de manera local (desde nuestro equipo/PC/máquina), se debe modificar NODE_EXPOSE_PORT.
+
+> Las sesiones se manejan mediante la librería express-session de nodejs, esta necesita de una llave secreta, la llave secreta se encuentra almacenada en la variable de entorno SECRET_TOKEN_LOGIN dentro del archivo  [/.env](https://github.com/bcorpas/node_vue_contactos/blob/master/.env) del proyecto.
 
 > Para elegir la base de datos a la cual se va a conectar el proyecto, se deben modificar los parámetros de conexión en el archivo [/db.js](https://github.com/bcorpas/node_vue_contactos/blob/master/db.js) del proyecto tal que:
 ```js

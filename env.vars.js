@@ -14,7 +14,6 @@ const dbPort = process.env.DB_PORT || 3666
 
 // Session Vars
 const userLoginSecretToken = process.env.SECRET_TOKEN_LOGIN || 'token_secreto_login'
-const userSessionTime = process.env.USER_SESSION_TIME || 90  // Tiempo en minutos
 
 
 module.exports = {
@@ -24,7 +23,6 @@ module.exports = {
     dbPassword,
     dbPort,
     userLoginSecretToken,
-    userSessionTime,
     nodeDockerPort,
     nodeExposePort
 }
