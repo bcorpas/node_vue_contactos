@@ -17,17 +17,37 @@ const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
 const ContactosModel = require('./models/contactos')
 const ContactosM =  ContactosModel(sequelizeConnection, DataTypes)
 
+const UsuariosModel = require('./models/usuarios')
+const UsuariosM =  UsuariosModel(sequelizeConnection, DataTypes)
+
+
+// Relationships
+const contactosUsuarioRL = UsuariosM.hasMany(ContactosM, { 
+    foreignKey: {
+      name: 'usuarioId',  // Nombre del campo foráneo
+      allowNull: false
+    },
+    as: 'contactosUsuarioRL',  // Alias para la relación, para cuando alguno de 
+    // los dos modelos necesite acceder a la relación.
+    // También será el nombre del diccionario cuando se haga una 
+    // consulta para traer los objetos relacionados mediante include.
+    onDelete: 'RESTRICT',
+    onUpdate: 'CASCADE'
+})  // Relación 1:M (UsuariosM:ContactosM)
+
 
 // DB Synchronization
 async function dbSynchronization(){
-    await sequelizeConnection.sync({ alter: true })
+    await sequelizeConnection.sync({ alter: false })
     console.log('[[ DB Synchronization success ]]')
 }
 dbSynchronization()
 
 
 module.exports = {
-    ContactosM
+    ContactosM,
+    UsuariosM,
+    contactosUsuarioRL,
 }
 
 

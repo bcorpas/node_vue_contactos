@@ -3,15 +3,28 @@ class APIsServices{
     // 'http://localhost:2000/apis/contactos/get/all'
 
     contactosAPIsURL = '/apis/contactos'
+    usuariosAPIsURL = '/apis/usuarios'
 
-
-    async getAPIResponse(path, request_options={}){
-        const apiURL = `${this.contactosAPIsURL}${path}`
+    // app.sweetAlert('Lo sentimos, ocurrió un error', 'error')
+    // return false
+    async getAPIResponse(path, request_options={}, pre_path=this.contactosAPIsURL){
+        const apiURL = pre_path + path
         const api = await fetch(apiURL, request_options)
-        const apiResponse = api.json()
+        const apiResponse = await api.json()
+        
 
         if(apiResponse['response'] == 'ERROR'){
-            app.sweetAlert(apiResponse['errors']['msg'], 'error')
+            let apiErrors = ''
+            apiResponse['errors'].forEach(element => {
+                apiErrors += '-' + element['msg'] + '<br><br>'
+            });
+            apiErrors = apiErrors.slice(0, -8)
+            app.sweetAlert(apiErrors, 'error')
+            
+            return false
+        }else if(!api.ok){
+            app.sweetAlert('Lo sentimos, ocurrió un error', 'error')
+            
             return false
         }
         
@@ -19,7 +32,7 @@ class APIsServices{
     }
 
 
-    // Métodos para consumir las APIs
+    // Métodos para consumir las APIs de /apis/contactos
     async getAllContactos(app){
         const apiResponse = await this.getAPIResponse('/get/all')
         if(!apiResponse)
@@ -70,17 +83,36 @@ class APIsServices{
 
         app.resetForm()
     }
+
+
+    // Métodos para consumir las APIs de /apis/usuarios
+    async createUsuario(app, usuario){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(usuario)
+        }
+
+        const apiResponse = await this.getAPIResponse('/sign_up', requestOptions, this.usuariosAPIsURL)
+        if(apiResponse){
+            app.sweetAlert('Usuario registrado', 'success')
+            app.usuarios_form = {}
+        }
+    }
 }
 
 const appId = '#app'
 const app = new Vue({
     el: appId,
     data: {
-        form_default_legend: 'Crear Contacto',
         apisServices: null,
+
+        form_default_legend: 'Crear Contacto',
         contactos: [],
         contacto_form: {},
-        current_contacto: null
+        current_contacto: null,
+
+        usuarios_form: {}
     },
 
     async created(){
@@ -89,6 +121,7 @@ const app = new Vue({
     },
 
     methods: {
+        // Global methods
         sweetAlert: function(message, type=''){
             // type = 'success' || 'error'
 
@@ -108,6 +141,8 @@ const app = new Vue({
                 }, 2000)
             }, 4000)
         },
+
+        // Contactos methods
         resetForm: async function(){
             
             await this.apisServices.getAllContactos(this)
@@ -148,6 +183,11 @@ const app = new Vue({
         deleteContacto: async function(){
             await this.apisServices.deleteContacto(this, this.current_contacto)
             await this.apisServices.getAllContactos(this)
-        }
+        },
+
+        // Usuarios methods
+        saveUsuario: async function(){
+            await this.apisServices.createUsuario(this, this.usuarios_form)
+        },
     }
 }) 

@@ -1,0 +1,100 @@
+:root{
+    --formBackground: white;
+}
+
+
+
+.loginContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.loginBox{
+    width: 37rem;
+    height: auto;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: auto;
+    background-color: var(--formBackground);
+}
+
+
+
+.loginLeftSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+}.loginLeftSide > h1{
+    font-size: 1.8rem;
+}
+
+
+
+.loginRightSide{
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.loginTitle{
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--secondColor);
+    text-shadow: 1px 1px 0 var(--mainColor);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+.loginLabel{
+    width: 15rem;
+    position: relative;
+    background-color: var(--formBackground);
+    margin: .4rem 0;
+    display: block;
+    height: auto;
+    z-index: 1;
+}
+.lLPlaceholder{
+    color: black;
+    left: 1rem;
+    bottom: calc(100% - 0.6rem);
+    font-style: normal;    
+    padding: .1rem;
+    background-color: var(--formBackground);
+    position: absolute;
+    font-size: .8rem;
+    font-style: normal;
+}
+.loginInput{
+    width: 100%;
+    padding: .5rem 1rem;
+    color: var(--secondColor);
+    background-color: transparent;
+    border: 2px solid silver;
+    border-radius: 8px;
+    font-size: .8rem;
+    transition: all .5s linear;
+}
+.loginInput:focus{
+    border-color: var(--secondColor);
+}
+.loginRightSide .loginButton{
+    font-size: 1rem;
+    font-weight: normal;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .2),
+                0 3px 2px rgba(0, 0, 0, .3);
+}
+

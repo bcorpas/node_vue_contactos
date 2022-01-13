@@ -4,6 +4,7 @@
     background-color: #eee;
     text-align: center;
     color: black;
+    font-weight: bold;
     border-radius: .15rem;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1),
                 0 5px 3px rgba(0, 0, 0, .1);
@@ -21,11 +22,9 @@
 
 .sweetAlert.error{
     background-color: #ff00002b;
-    color: #c70000;
 }
 
 .sweetAlert.success{
     background-color: #6eff002b;
-    color: #104e01;
 }
 

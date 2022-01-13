@@ -1,9 +1,19 @@
 // Dependencies
 const express = require('express')
 const bodyParser = require('body-parser')
-const apisRouter = require('./routes/apis')
-const clientRouter = require('./routes/client')
-const { nodeDockerPort, nodeExposePort } = require('./env.vars')
+const passport = require('passport')
+const passportLocal = require('passport-local').Strategy
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session')
+
+
+// Env vars file
+const { nodeDockerPort, nodeExposePort, userLoginSecretToken } = require('./env.vars')
+
+
+// Login middleware
+const { loginAuth, loginSerialize, loginDeserialize } = require('./middlewares/login')
+
 
 const app = express()
 
@@ -18,17 +28,31 @@ app.set('view engine', 'ejs');
 
 // Middlewares
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))  // Para recibir los 
+// datos enviados por formularios.
+app.use(cookieParser(userLoginSecretToken))  // El token secreto para las cookies
+app.use(expressSession({
+    secret: userLoginSecretToken,  // El token secreto para la sesión 
+    resave: true,  // Se guarda la sesión en cada petición 
+    saveUninitialized: true  // Cuando se inicie una sesión en una petición, se 
+    // guarda automáticamente.
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new passportLocal(loginAuth))  // Función donde se autentica (inicia sesión) el usuario
+passport.serializeUser(loginSerialize)  // Función donde se serializa la información del usuario 
+// que inició sesión.
+passport.deserializeUser(loginDeserialize)  // Función donde se deserializa la información del 
+// usuario que inició sesión.
+
+
+// Router files
+const mainRouter = require('./routes/router')
 
 
 // Routes
-// Todas las peticiones cuya URN empiecen por /apis/ las envía al 
-// enrutador en el archivo en la ruta de apisRouter.
-app.use('/apis', apisRouter)
-
-// Todas las peticiones cuya URN empiecen por / las envía al 
-// enrutador en el archivo en la ruta de clientRouter.
-app.use('/', clientRouter)
+// Todas las peticiones las envía al router principal
+app.use('/', mainRouter)
 
 
 // App run

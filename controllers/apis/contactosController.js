@@ -4,14 +4,23 @@ const { ContactosM } = require('../../db')
 
 module.exports = {
     getAll: async (req, res) =>{
-        const allContactos = await ContactosM.findAll()
+        const allContactos = await ContactosM.findAll({
+            where: {
+                'usuarioId': req.user.id
+            }
+        })
         res.json({ 'response': 'SUCCESS', allContactos })
     },
     getOne: async (req, res) =>{
 
         const targetContacto = req.params.ContactoID
     
-        const contacto = await ContactosM.findByPk(targetContacto)
+        const contacto = await ContactosM.findOne({
+            where: {
+                'id': targetContacto,
+                'usuarioId': req.user.id
+            }
+        })
     
         // Si el contacto no existe
         if(!contacto){
@@ -21,6 +30,7 @@ module.exports = {
         res.json({ 'response': 'SUCCESS', contacto })
     },
     create: async (req, res) =>{
+        req.body.usuarioId = req.user.id
         const contacto = await ContactosM.create(req.body)
         res.json({ 'response': 'SUCCESS', contacto })
     },
@@ -30,7 +40,12 @@ module.exports = {
         const targetContacto = req.params.ContactoID
     
         // Se obtiene el contacto antes de ser modificado
-        const old_contacto = await ContactosM.findByPk(targetContacto)
+        const old_contacto = await ContactosM.findOne({
+            where: {
+                'id': targetContacto,
+                'usuarioId': req.user.id
+            }
+        })
     
         // Si el contacto no existe
         if(!old_contacto){
@@ -52,7 +67,12 @@ module.exports = {
         const targetContacto = req.params.ContactoID
     
         // Se obtiene el contacto antes de ser eliminado
-        const contacto_deleted = await ContactosM.findByPk(targetContacto)
+        const contacto_deleted = await ContactosM.findOne({
+            where: {
+                'id': targetContacto,
+                'usuarioId': req.user.id
+            }
+        })
     
     
         // Si el contacto no existe

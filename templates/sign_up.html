@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/sweet_alert.css">
+</head>
+<body>
+
+    <div id="app" class="loginContainer mBBG">
+        <div class="loginBox">
+
+            <section class="loginLeftSide secondBG">
+                <h1 class="hTitle mC"><b class="cPild">Contactos</b>App</h1>
+                <br>
+                <a href="/usuarios/login">Iniciar sesión</a>
+            </section>
+
+
+            <section class="loginRightSide">
+
+                <h2 class="loginTitle">Registrarse</h2>
+
+                <label class="loginLabel">
+                    <input type="text" name="username" class="loginInput" v-model="usuarios_form.username">
+                    <i class="lLPlaceholder">Usuario</i>
+                </label>
+
+                <label class="loginLabel">
+                    <input type="password" name="password" class="loginInput" v-model="usuarios_form.password">
+                    <i class="lLPlaceholder">Contraseña</i>
+                </label>
+                
+                <button class="loginButton cButton" v-on:click="saveUsuario()">
+                    Continuar
+                </button>
+            </section>
+        </div>
+    </div>
+    
+
+
+<!-- Vue APP -->
+<script src="/js/vue.app.js"></script>
+</body>
+</html>
