@@ -54,7 +54,5 @@ services:
           - mariadb_db
         ports:
           - $NODE_EXPOSE_PORT:$NODE_DOCKER_PORT
-        links:  # Crea un puente para que los dos contenedores estén en la misma red
-          - mariadb_db
         volumes:
           - .:/usr/src/app
